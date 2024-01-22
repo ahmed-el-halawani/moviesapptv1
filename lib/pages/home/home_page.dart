@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moviesapptv1/MyDio.dart';
 import 'package:moviesapptv1/pages/widgets/carousel_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -15,7 +16,8 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
+
               Padding(
                 padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
                 child: CarouselWidget(),

@@ -1,8 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:moviesapptv1/MyDio.dart';
 import 'package:moviesapptv1/pages/player/player_page.dart';
 import 'package:moviesapptv1/pages/widgets/title_widget.dart';
 
-class DetailsPage extends StatelessWidget {
+class DetailsPage extends StatefulWidget {
   static var routeName = "/details";
   final String? imageUrl;
 
@@ -12,9 +14,15 @@ class DetailsPage extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<DetailsPage> createState() => _DetailsPageState();
+}
+
+class _DetailsPageState extends State<DetailsPage> {
+  String text = "";
+
+  @override
   Widget build(BuildContext context) {
-    var imgUrl =
-        "https://www.themoviedb.org/t/p/w300_and_h450_bestv2_filter(blur)/z9a3b7DePtdo2E8NzyPwoGHGsYk.jpg";
+    var imgUrl = "https://www.themoviedb.org/t/p/w300_and_h450_bestv2_filter(blur)/z9a3b7DePtdo2E8NzyPwoGHGsYk.jpg";
     var argumentsObj = ModalRoute.of(context)?.settings.arguments;
     if (argumentsObj != null) {
       Map? arguments = argumentsObj as Map;
@@ -35,6 +43,18 @@ class DetailsPage extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                ElevatedButton(
+                    onPressed: () async {
+                      var data = await MyDio().dio.get("https://www.geeksforgeeks.org/different-ways-to-change-android-sdk-path-in-android-studio/",
+                          options: Options(headers: {
+                            "Connection": "keep-alive",
+                          }));
+
+                      setState(() {
+                        text = data.data;
+                      });
+                    },
+                    child: Text(text)),
                 TitleWidget(imageUrl: imgUrl),
                 InkWell(
                   autofocus: true,
